@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Polls All Results{% endblock %}
+
+{% block content %}
+<div class="btn-group">
+    <a href="{% url 'polls:index' %}" class="btn btn-info">Back to List</a>
+</div>
+<p></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scopoe="col">#</th>
+            <th scopoe="col">Question</th>
+            <th scopoe="col">Choices</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% if latest_question_list %}
+        <ul>
+            {% for question in latest_question_list %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><li type="none">{{question.question_text}}</li></td>
+                    <td>
+                        {% for choice in question.choice_set.all %}
+                            <li>{{choice.choice_text}} -- {{choice.votes}} vote{{choice.votes|pluralize}}</li>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+    </tbody>
+</table>
+{% endblock %}

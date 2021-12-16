@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Detail{% endblock %}
+
+{% block content %}
+<table>
+    <tbody>
+        <tr>
+            <td>
+                {{bookmark.site_name}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="{{bookmark.url}}" target="_blank">{{bookmark.url}}</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="{% url 'bookmark:update' pk=bookmark.id %}" class="btn btn-success btn-sm">Modify</a>
+                <a href="{% url 'bookmark:delete' pk=bookmark.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}
